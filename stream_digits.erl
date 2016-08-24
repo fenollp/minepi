@@ -33,6 +33,12 @@ init ("sqrt") ->
      ,data => 1
      ,succ => fun sqrt_succ/1
      };
+init ("rand") ->
+    _ = rand:seed(exs1024, {123, 123534, 345345}),
+    #{yielder => fun (_) -> rand:uniform() end
+     ,data => undefined
+     ,succ => fun id/1
+     };
 init (File) ->
     case file:open(File, [read, binary, raw]) of
         {ok, Dev} ->
