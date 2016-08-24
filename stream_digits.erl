@@ -20,6 +20,9 @@
 
 %% API
 
+main ([]) ->
+    io:format(standard_error, "Usage: ./stream_digits  <sqrt | rand | file/name.txt>\n", []),
+    halt(1);
 main ([Arg]) ->
     loop(init(Arg)).
 
