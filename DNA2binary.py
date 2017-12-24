@@ -10,13 +10,18 @@ if len(sys.argv) != 2 :
 ALPHABET = "ATGC"
 with open(sys.argv[1], 'r') as fd:
     with open(1, 'wb') as out:
+
         a = ALPHABET.index(fd.read(1).upper())
+        b = ALPHABET.index(fd.read(1).upper())
+        c = ALPHABET.index(fd.read(1).upper())
+
         while True:
             char = fd.read(1)
             if not char:
                 break
             if char in "\n":
                 continue
-            b = ALPHABET.index(char.upper())
-            out.write(bytes([ a *10+ b ]))
-            a = b
+            d = ALPHABET.index(char.upper())
+            byte = (((a << 2) + b << 2) + c << 2) + d
+            out.write(bytes([byte]))
+            a, b, c = b, c, d
